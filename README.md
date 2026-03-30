@@ -2,10 +2,10 @@
 
 **Title:** Evaluating an Integrated AI-Driven Learning Platform for Unified Tertiary Matriculation Examination (UTME) Preparation.
 
-This repository is a strictly functional, research-focused version of the Quizant platform, designed for a Master's Thesis study. It has been aggressively pruned of all non-core features (gamification, social tools, user uploads) to ensure a controlled experimental environment focused on four core research pillars.
+This repository is a strictly functional, research-focused AI-Powered learning platform designed for a Master's Thesis study.
 
 ## 4 Core Research Pillars
-1. **AI Tutor (Mentat):** Conversational RAG-based tutor using pre-loaded JAMB/WAEC knowledge.
+1. ** Savant AI Tutor:** Conversational RAG-based tutor using pre-loaded JAMB knowledge.
 2. **Adaptive Quiz:** Dynamically generated practice sessions with difficulty adjustment.
 3. **Flashcards:** Spaced-repetition system (SM-2) for active recall of core concepts.
 4. **Analytics:** Performance trajectory and goal progress visualization.
