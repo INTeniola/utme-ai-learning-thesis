@@ -1,4 +1,4 @@
-# Quizant — Thesis Edition (Research Artifact)
+# Research Artifact
 
 **Title:** Evaluating an Integrated AI-Driven Learning Platform for Unified Tertiary Matriculation Examination (UTME) Preparation.
 
