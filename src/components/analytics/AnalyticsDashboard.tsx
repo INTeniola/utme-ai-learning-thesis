@@ -258,9 +258,9 @@ export function AnalyticsDashboard({ onBack }: AnalyticsDashboardProps) {
       </div>
 
       {/* Main Grid */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-6">
         {/* Score Trajectory */}
-        <Card className="lg:col-span-2">
+        <Card className="w-full">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-base">
               <TrendingUp className="h-5 w-5 text-primary" />
@@ -272,7 +272,7 @@ export function AnalyticsDashboard({ onBack }: AnalyticsDashboardProps) {
           </CardHeader>
           <CardContent>
             {data.scoreTrajectory.length > 0 ? (
-              <ResponsiveContainer width="100%" height={280}>
+              <ResponsiveContainer width="100%" height={320}>
                 <LineChart data={data.scoreTrajectory}>
                   <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                   <XAxis
@@ -305,8 +305,9 @@ export function AnalyticsDashboard({ onBack }: AnalyticsDashboardProps) {
                     dataKey="score"
                     name="Actual Score"
                     stroke="hsl(var(--primary))"
-                    strokeWidth={2}
-                    dot={{ fill: 'hsl(var(--primary))' }}
+                    strokeWidth={3}
+                    dot={{ fill: 'hsl(var(--primary))', r: 4 }}
+                    activeDot={{ r: 6 }}
                   />
                   <Line
                     type="monotone"
@@ -333,269 +334,20 @@ export function AnalyticsDashboard({ onBack }: AnalyticsDashboardProps) {
             )}
 
             {/* Progress to Target */}
-            <div className="mt-4 rounded-lg border p-4">
-              <div className="mb-2 flex items-center justify-between text-sm">
-                <span className="font-medium">Progress to Target</span>
-                <span className="text-muted-foreground">
+            <div className="mt-6 rounded-xl border-2 border-primary/10 p-6 bg-primary/5">
+              <div className="mb-3 flex items-center justify-between text-sm">
+                <span className="font-bold text-lg">Goal Progress</span>
+                <span className="font-mono font-bold text-primary">
                   {data.projectedScore} / {data.targetScore}
                 </span>
               </div>
-              <Progress value={targetProgress} className="h-2" />
-              <p className="mt-2 text-xs text-muted-foreground">
+              <Progress value={targetProgress} className="h-3" />
+              <p className="mt-3 text-sm font-medium text-muted-foreground">
                 {scoreGap > 0
-                  ? `${scoreGap} points to reach your goal. Keep practicing!`
-                  : 'Congratulations! You\'re on track to exceed your target!'}
+                  ? `You are ${scoreGap} points away from your ${data.targetScore} goal. Consistent practice is the key.`
+                  : 'Congratulations! You are currently performing above your target score!'}
               </p>
             </div>
-          </CardContent>
-        </Card>
-
-        {/* Study Fatigue Indicator */}
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <Zap className="h-5 w-5 text-primary" />
-              Cognitive Load
-            </CardTitle>
-            <CardDescription>
-              Your current study fatigue level
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className={cn('mb-4 rounded-lg p-4', fatigueInfo.bg)}>
-              <div className="flex items-center gap-3">
-                <FatigueIcon className={cn('h-8 w-8', fatigueInfo.color)} />
-                <div>
-                  <p className={cn('font-semibold', fatigueInfo.color)}>
-                    {fatigueInfo.label}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {fatigueInfo.message}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <div>
-                <div className="mb-1 flex justify-between text-sm">
-                  <span>Energy Level</span>
-                  <span className="font-medium">{fatigueInfo.percentage}%</span>
-                </div>
-                <Progress
-                  value={fatigueInfo.percentage}
-                  className={cn(
-                    'h-2',
-                    fatigueInfo.percentage > 60 && '[&>div]:bg-green-500',
-                    fatigueInfo.percentage <= 60 && fatigueInfo.percentage > 30 && '[&>div]:bg-yellow-500',
-                    fatigueInfo.percentage <= 30 && '[&>div]:bg-red-500'
-                  )}
-                />
-              </div>
-
-              <div className="rounded-lg bg-muted/50 p-3">
-                <p className="mb-2 text-xs font-medium">Recommendations</p>
-                <ul className="space-y-1 text-xs text-muted-foreground">
-                  {data.fatigueLevel === 'low' && (
-                    <>
-                      <li>• Perfect time for complex problem-solving</li>
-                      <li>• Try challenging new topics</li>
-                    </>
-                  )}
-                  {data.fatigueLevel === 'moderate' && (
-                    <>
-                      <li>• Review familiar concepts</li>
-                      <li>• Take a 5-minute break every 25 minutes</li>
-                    </>
-                  )}
-                  {data.fatigueLevel === 'high' && (
-                    <>
-                      <li>• Switch to lighter review tasks</li>
-                      <li>• Take a 15-minute break now</li>
-                    </>
-                  )}
-                  {data.fatigueLevel === 'critical' && (
-                    <>
-                      <li>• Stop studying and rest</li>
-                      <li>• Continue tomorrow for better retention</li>
-                    </>
-                  )}
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Peer Comparison Section */}
-      <div className="mt-6 grid gap-6 lg:grid-cols-2">
-        {/* Subject Performance vs Peers */}
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <Users className="h-5 w-5 text-primary" />
-              Subject Performance vs Peers
-            </CardTitle>
-            <CardDescription>
-              How you compare to other users
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {data.subjectPerformance.length > 0 ? (
-              <ResponsiveContainer width="100%" height={280}>
-                <BarChart data={data.subjectPerformance} layout="vertical">
-                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" horizontal={false} />
-                  <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 12 }} />
-                  <YAxis
-                    type="category"
-                    dataKey="subject"
-                    tick={{ fontSize: 12 }}
-                    width={80}
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: 'hsl(var(--card))',
-                      border: '1px solid hsl(var(--border))',
-                      borderRadius: '8px',
-                    }}
-                  />
-                  <Legend />
-                  <Bar
-                    dataKey="userScore"
-                    name="Your Score"
-                    fill="hsl(var(--primary))"
-                    radius={[0, 4, 4, 0]}
-                  />
-                  <Bar
-                    dataKey="averageScore"
-                    name="Peer Average"
-                    fill="hsl(var(--muted-foreground))"
-                    radius={[0, 4, 4, 0]}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            ) : (
-              <div className="flex h-64 items-center justify-center">
-                <EmptyState
-                  icon={Users}
-                  title="No peer comparison"
-                  description="Take an exam to see how you stack up against peers."
-                  actionLabel="Take a Quiz"
-                  onAction={onBack}
-                  className="py-6"
-                />
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Topic-Level Comparison */}
-        <Card>
-          <CardHeader className="pb-2">
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="flex items-center gap-2 text-base">
-                  <Brain className="h-5 w-5 text-primary" />
-                  Topic Comparison
-                </CardTitle>
-                <CardDescription>
-                  Your performance vs. peer average by topic
-                </CardDescription>
-              </div>
-              <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                <SelectTrigger className="w-32">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {SUBJECTS.map((subject) => (
-                    <SelectItem key={subject} value={subject}>
-                      {subject}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </CardHeader>
-          <CardContent>
-            {data.topicComparisons.length > 0 ? (
-              <ResponsiveContainer width="100%" height={280}>
-                <BarChart data={data.topicComparisons}>
-                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                  <XAxis
-                    dataKey="topic"
-                    tick={{ fontSize: 10 }}
-                    interval={0}
-                    angle={-20}
-                    textAnchor="end"
-                    height={60}
-                  />
-                  <YAxis domain={[0, 100]} tick={{ fontSize: 12 }} />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: 'hsl(var(--card))',
-                      border: '1px solid hsl(var(--border))',
-                      borderRadius: '8px',
-                    }}
-                  />
-                  <Legend />
-                  <Bar
-                    dataKey="userScore"
-                    name="You"
-                    fill="hsl(var(--primary))"
-                    radius={[4, 4, 0, 0]}
-                  />
-                  <Bar
-                    dataKey="averageScore"
-                    name="Peer Avg"
-                    fill="hsl(var(--muted-foreground))"
-                    radius={[4, 4, 0, 0]}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            ) : (
-              <div className="flex h-64 items-center justify-center">
-                <EmptyState
-                  icon={Brain}
-                  title="No topic insights"
-                  description={`Complete ${selectedSubject} exercises to see topic analysis.`}
-                  actionLabel="Study Subject"
-                  onAction={onBack}
-                  className="py-6"
-                />
-              </div>
-            )}
-
-            {/* Quick Insights */}
-            {data.topicComparisons.length > 0 && (
-              <div className="mt-4 space-y-2">
-                {data.topicComparisons
-                  .filter(t => t.userScore > 0 && t.userScore > t.averageScore)
-                  .slice(0, 2)
-                  .map(t => (
-                    <div key={t.topic} className="flex items-center gap-2 rounded-lg bg-green-50 px-3 py-2 text-xs">
-                      <Badge variant="secondary" className="bg-green-100 text-green-700">
-                        Above Avg
-                      </Badge>
-                      <span className="text-green-800">
-                        You're {t.userScore - t.averageScore}% above average in {t.topic}
-                      </span>
-                    </div>
-                  ))}
-                {data.topicComparisons
-                  .filter(t => t.userScore > 0 && t.userScore < t.averageScore)
-                  .slice(0, 1)
-                  .map(t => (
-                    <div key={t.topic} className="flex items-center gap-2 rounded-lg bg-yellow-50 px-3 py-2 text-xs">
-                      <Badge variant="secondary" className="bg-yellow-100 text-yellow-700">
-                        Focus Area
-                      </Badge>
-                      <span className="text-yellow-800">
-                        Practice more on {t.topic} to catch up
-                      </span>
-                    </div>
-                  ))}
-              </div>
-            )}
           </CardContent>
         </Card>
       </div>

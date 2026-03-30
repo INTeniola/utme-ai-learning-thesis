@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 const FUN_PHRASES = [
-  "Calibrating your Mentat Tutor...",
+  "Calibrating your Savant Tutor...",
   "Brewing some smart responses...",
   "Reticulating splines...",
   "Consulting the digital oracle...",

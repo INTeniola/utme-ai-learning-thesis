@@ -503,14 +503,7 @@ export function useAITutor() {
       // RAG: Client-side RAG is now handled by the Librarian Subagent on the Edge.
       // We pass zeroed-out chunks here to keep the context object valid.
       const knowledgeChunks: any[] = [];
-
-      // Step 5 — PDF/image uploads: keep file_type so prompt builder can route to multimodal path
-      const userUploads = userUploadsRaw.map((u: any) => ({
-        file_name: u.file_name,
-        raw_text: u.raw_text?.slice(0, 800) || '',
-        file_type: (u.file_type as string | undefined)?.toLowerCase() || 'text',
-        file_url: (u.file_url as string | undefined) || null,
-      }));
+      const userUploads: any[] = [];
 
       // Process context parts
       const weakTopics = masteryData.filter(m => m.accuracy < 60).sort((a, b) => a.accuracy - b.accuracy).slice(0, 5);
@@ -977,7 +970,7 @@ export function useAITutor() {
       // Get session for Auth
       const { data: { session } } = await supabase.auth.getSession();
       
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mentat-swarm`, {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/savant-swarm`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1125,7 +1118,7 @@ export function useAITutor() {
         lastFailedMessage.current = studentMessage;
         toast.error('Connection lost — your message was not sent.');
       } else {
-        toast.error(error.message || 'Mentat Tutor is momentarily unavailable.');
+        toast.error(error.message || 'Savant Tutor is momentarily unavailable.');
       }
 
       setInteractions(prev => {

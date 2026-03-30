@@ -8,7 +8,7 @@ const DUNE_TERMS = [
   "Vladimir", "Feyd", "Rabban", "Shaddam", "Irulan", "Mohiam", "Pardot", "Liet", "Siona", "Teg",
   "Idaho", "Atreides", "Harkonnen", "Corrino", "Fremen", "Sardaukar", "Bene-Gesserit", 
   "Kwisatz-Haderach", "MuadDib", "Usul", "Shai-Hulud", "Arrakis", "Caladan", "Giedi-Prime", 
-  "Dune", "Spacing-Guild", "Mentat", "Gom-Jabbar", "Crysknife", "Kanly", "Lisan-al-Gaib",
+  "Dune", "Spacing-Guild", "Savant", "Gom-Jabbar", "Crysknife", "Kanly", "Lisan-al-Gaib",
   "Mahdi", "Sietch", "Naib", "Bashar", "Burseg", "Caid"
 ];
 

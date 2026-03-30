@@ -78,7 +78,7 @@ serve(async (req) => {
     // 2.2 Check Semantic Cache (TurboQuant Strategy)
     const queryHash = await hashQuery(message);
     const { data: cached } = await supabaseService
-      .from('mentat_cache')
+      .from('savant_cache')
       .select('response_text')
       .eq('query_hash', queryHash)
       .eq('subject', subject)

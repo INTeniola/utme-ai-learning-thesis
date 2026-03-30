@@ -10,7 +10,7 @@ import { DashboardHome } from './DashboardHome';
 import { DashboardSidebar, DashboardView } from './DashboardSidebar';
 import { DashboardTopBar } from './DashboardTopBar';
 import { MobileNav } from './MobileNav';
-import { MentatTutor } from '@/components/study/MentatTutor';
+import { SavantTutor } from '@/components/study/SavantTutor';
 
 // Lazy-loaded pillar views
 const QuizController = lazy(() => import('@/components/quiz/QuizController').then(m => ({ default: m.QuizController })));
@@ -73,7 +73,7 @@ export function Dashboard() {
       case 'ai-tutor':
         return (
           <SidebarProvider>
-            <MentatTutor
+            <SavantTutor
               subject={selectedSubject || 'General'}
               onBack={handleBack}
               onNavigate={setView}

@@ -186,7 +186,7 @@ export function ConceptVisualizer({ subject = 'General', onBack, activeFocusId }
                     <div className="text-center space-y-4 max-w-md">
                         <h3 className="text-xl font-bold tracking-tight">Synthesizing Concept Map</h3>
                         <p className="text-sm text-muted-foreground leading-relaxed px-6">
-                            Mentat is weaving complex logic structures and cross-referencing syllabus nodes for an optimal visual breakdown.
+                            Savant is weaving complex logic structures and cross-referencing syllabus nodes for an optimal visual breakdown.
                         </p>
                         <div className="pt-4 px-12">
                            <Progress value={45} className="h-1.5 animate-pulse" />

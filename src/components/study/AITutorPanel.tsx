@@ -141,7 +141,7 @@ export function AITutorPanel({
             </div>
             <div>
               <CardTitle className="text-base flex items-center gap-2">
-                Mentat Tutor
+                Savant Tutor
                 {streak > 0 && (
                   <span className="flex items-center gap-1 rounded-full bg-orange-100 px-2 py-0.5 text-xs font-medium text-orange-600 dark:bg-orange-900/30 dark:text-info">
                     <Flame className="h-3 w-3" />

@@ -74,7 +74,7 @@ export function useDocumentIngestion() {
                 topic: newRecord.detected_topic,
               }
             }));
-            toast.success('Analysis complete! Mentat has internalized the material.');
+            toast.success('Analysis complete! Savant has internalized the material.');
             setCurrentUploadId(null); // Stop listening
           } else if (newRecord.processing_status === 'failed') {
             setState(prev => ({
