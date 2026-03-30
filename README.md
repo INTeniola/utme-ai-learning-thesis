@@ -10,12 +10,6 @@ This repository is a strictly functional, research-focused version of the Quizan
 3. **Flashcards:** Spaced-repetition system (SM-2) for active recall of core concepts.
 4. **Analytics:** Performance trajectory and goal progress visualization.
 
-## Technical Pruning (Watered Down version)
-- **No Gamification:** Removed Heatmaps, Achievements, Badges, and Streaks to minimize participant cognitive load.
-- **No Social Tools:** Removed Leaderboards and Community features to prevent competitive bias in the study.
-- **No User Uploads:** Disabled PDF/Image ingestion to enforce a "pre-loaded knowledge base only" policy for data consistency.
-- **Minimal UI:** Stripped the Sidebar and Dashboard to focus exclusively on the research pillars.
-
 ## Tech Stack
 - **Frontend:** React 18, TypeScript, Vite, Tailwind CSS, Shadcn UI
 - **Database & Auth:** Supabase (Auth, PostgreSQL)
@@ -32,6 +26,3 @@ This artifact is used to evaluate:
 1. Install dependencies: `npm install`
 2. Start development server: `npm run dev`
 3. Access the Research Hub via the local server URL.
-
----
-*Note: This is a static Research Artifact. For the main product development, visit the [original repository](https://github.com/INTeniola/adaptive-learning-core).*
